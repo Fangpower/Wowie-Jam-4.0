@@ -98,13 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d85b7abdfc24c4ab80d427b4dbd36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.5
+  time: 2
   cycle:
   - {fileID: 21300000, guid: 542767be2c9128441aef4059e8307495, type: 3}
   - {fileID: 21300000, guid: 55eb3ec5db1deb14cb7e92ddbad7d343, type: 3}
   - {fileID: 21300000, guid: 40fcf7579e860b1479eb6b6633312af7, type: 3}
   - {fileID: 21300000, guid: d93bce42d45b927499f06989d769ce17, type: 3}
   - {fileID: 21300000, guid: d8c4ac6f2323d5f44b6c3097ad41c9d1, type: 3}
+  current: 0
   done: 0
 --- !u!61 &7369810761160171549
 BoxCollider2D:

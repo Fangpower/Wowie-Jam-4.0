@@ -8,15 +8,13 @@ public class GridController : MonoBehaviour
 {
     private Grid grid;
     [SerializeField] Tilemap interactiveMap = null;
-    [SerializeField] Tilemap pathMap = null;
     [SerializeField] Tile hoverTile = null;
-    [SerializeField] Tile pathTile = null;
     [SerializeField] GameObject canvas;
     [SerializeField] LayerMask plantMask;
     [SerializeField] LayerMask dirtMask;
+    [SerializeField] GameObject plant;
 
     private Vector3Int previousMousePos = new Vector3Int();
-    private Vector3Int clickedMousePos = new Vector3Int();
 
     private void Start(){
         grid = GetComponent<Grid>();
@@ -25,7 +23,7 @@ public class GridController : MonoBehaviour
     private void Update(){
         Vector3Int mousePos = GetMousePosition();
         Collider2D[] underMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, plantMask);
-        Collider2D[] dirtUnderMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, dirtMask);
+        Collider2D[] dirtUnderMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, dirtMask);
 
         //Show highlighter tile
         if(!mousePos.Equals(previousMousePos) && !canvas.activeSelf){
@@ -36,14 +34,16 @@ public class GridController : MonoBehaviour
 
         //Make plant
         if(Input.GetMouseButtonDown(0) && underMouse.Length == 0 && !canvas.activeSelf && dirtUnderMouse.Length == 1){
-            Time.timeScale = 0.25f;
-            clickedMousePos = mousePos;
-            canvas.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
-            canvas.SetActive(true);
+            OnPlant();
         } else if(Input.GetMouseButtonDown(0) && underMouse.Length == 1){
             if(underMouse[0].GetComponent<Plant>().done){
                 underMouse[0].GetComponent<Plant>().Harvest();
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            canvas.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
+            canvas.SetActive(!canvas.activeSelf);
         }
     }
 
@@ -52,7 +52,12 @@ public class GridController : MonoBehaviour
         return grid.WorldToCell(mouseWorldPos);
     }
 
-    public void OnClick(GameObject plant){
+    public void OnClick(GameObject _plant){
+        plant = _plant;
+        canvas.SetActive(false);
+    }
+
+    void OnPlant(){
         TMP_Text text = null;
         int current;
         switch(plant.name){
@@ -67,7 +72,5 @@ public class GridController : MonoBehaviour
             current--;
             text.text = current.ToString();
         }
-        canvas.SetActive(false);
-        Time.timeScale = 1;
     }
 }

@@ -5,13 +5,19 @@ using UnityEngine;
 public class EnemyWaves : MonoBehaviour
 {
     [SerializeField] GameObject enemy1;
-    [SerializeField] Vector4 minMax;
+    [SerializeField] AnimationCurve ac;
+    [SerializeField] float speed;
+    [SerializeField] float baseTime;
 
     float deltaTime;
+    float percentage;
+    float curTime;
 
     void Start()
     {
         StartCoroutine("Waves");
+        StartCoroutine("Difficulty");
+        curTime = baseTime;
     }
 
     private void Update(){
@@ -22,7 +28,7 @@ public class EnemyWaves : MonoBehaviour
 
     private IEnumerator Waves(){
         while(true){
-            yield return new WaitForSeconds(2.5f);
+            yield return new WaitForSeconds(curTime);
             
             int dir = Random.Range(0, 4);
             Vector2 randPos = new Vector2(0,0);
@@ -34,7 +40,17 @@ public class EnemyWaves : MonoBehaviour
                 case 3: randPos = new Vector2(Random.Range(-5, 6), 6.5f); break;
             }
 
-            Instantiate(enemy1, randPos, Quaternion.identity);
+            var temp = Instantiate(enemy1, randPos, Quaternion.identity);
+            temp.transform.SetParent(transform);
+        }
+    }
+
+    private IEnumerator Difficulty(){
+        while(percentage < 1f){
+            yield return new WaitForSeconds(speed);
+            percentage += Time.deltaTime * 1;
+            curTime = baseTime * ac.Evaluate(percentage);
+            //print(curTime);
         }
     }
 }

@@ -17,10 +17,20 @@ public class Turret : MonoBehaviour
 
     [SerializeField] Image[] boxes;
     [SerializeField] Sprite[] boxLooks;
+    [SerializeField] SpriteRenderer showAmmo;
+    [SerializeField] Sprite[] ammoIcons;
+    [SerializeField] float maxHealth;
+    [SerializeField] Image healthBar;
+
 
     private Transform closestEnemy;
     private Vector2 direction;
     private bool canFire = true;
+    private float health;
+
+    void Start(){
+        health = maxHealth;
+    }
 
     void Update()
     {
@@ -49,6 +59,8 @@ public class Turret : MonoBehaviour
             ammoText[currentAmmo].text = currentAmmoAmt.ToString();
             canFire = false;
         }
+
+        healthBar.fillAmount = health/maxHealth;
     }
 
     private IEnumerator CoolDown(){
@@ -61,5 +73,10 @@ public class Turret : MonoBehaviour
         boxes[currentAmmo].sprite = boxLooks[0];
         currentAmmo = choice;
         boxes[currentAmmo].sprite = boxLooks[1];
+        showAmmo.sprite = ammoIcons[currentAmmo];
+    }
+
+    public void Damage(float damage){
+        health-=damage;
     }
 }

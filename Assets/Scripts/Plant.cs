@@ -41,7 +41,7 @@ public class Plant : MonoBehaviour
     }
 
     public void Harvest(){
-        current+=2;
+        current += Random.Range(2, 4);
         text.text = current.ToString();
         GameObject.Destroy(gameObject);
     }

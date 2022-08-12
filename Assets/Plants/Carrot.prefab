@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23d85b7abdfc24c4ab80d427b4dbd36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.5
+  time: 2
   cycle:
   - {fileID: 21300000, guid: 53923625c23e3434582a07a8f6d68fb4, type: 3}
   - {fileID: 21300000, guid: 9dc7e6e6dc3a3ba4ca1d5652677246d2, type: 3}
@@ -106,6 +106,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6ff33c0a5fb7add41a4fa10034196134, type: 3}
   - {fileID: 21300000, guid: 83b70fcb74b372341aa4951a3c47c4af, type: 3}
   - {fileID: 21300000, guid: 3d5a7a99efc4ff64894a582eb0096d09, type: 3}
+  current: 0
   done: 0
 --- !u!61 &7252046004225093551
 BoxCollider2D:
