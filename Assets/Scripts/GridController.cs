@@ -13,6 +13,7 @@ public class GridController : MonoBehaviour
     [SerializeField] Tile pathTile = null;
     [SerializeField] GameObject canvas;
     [SerializeField] LayerMask plantMask;
+    [SerializeField] LayerMask dirtMask;
 
     private Vector3Int previousMousePos = new Vector3Int();
     private Vector3Int clickedMousePos = new Vector3Int();
@@ -24,6 +25,7 @@ public class GridController : MonoBehaviour
     private void Update(){
         Vector3Int mousePos = GetMousePosition();
         Collider2D[] underMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, plantMask);
+        Collider2D[] dirtUnderMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, dirtMask);
 
         //Show highlighter tile
         if(!mousePos.Equals(previousMousePos) && !canvas.activeSelf){
@@ -33,15 +35,12 @@ public class GridController : MonoBehaviour
         }
 
         //Make plant
-        if(Input.GetMouseButtonDown(0) && underMouse.Length == 0 && !canvas.activeSelf){
+        if(Input.GetMouseButtonDown(0) && underMouse.Length == 0 && !canvas.activeSelf && dirtUnderMouse.Length == 1){
             Time.timeScale = 0.25f;
             clickedMousePos = mousePos;
             canvas.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
             canvas.SetActive(true);
-        }   
-
-        //Harvest plant
-        if(Input.GetMouseButtonDown(1) && underMouse.Length == 1){
+        } else if(Input.GetMouseButtonDown(0) && underMouse.Length == 1){
             if(underMouse[0].GetComponent<Plant>().done){
                 underMouse[0].GetComponent<Plant>().Harvest();
             }
@@ -69,5 +68,6 @@ public class GridController : MonoBehaviour
             text.text = current.ToString();
         }
         canvas.SetActive(false);
+        Time.timeScale = 1;
     }
 }
