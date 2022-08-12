@@ -34,7 +34,7 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 7f, enemyMask);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 5.25f, enemyMask);
 
         foreach(Collider2D coll in enemies){
             if(closestEnemy == null){

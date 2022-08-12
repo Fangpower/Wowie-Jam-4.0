@@ -23,7 +23,7 @@ public class GridController : MonoBehaviour
     private void Update(){
         Vector3Int mousePos = GetMousePosition();
         Collider2D[] underMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.25f, plantMask);
-        Collider2D[] dirtUnderMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.1f, dirtMask);
+        Collider2D[] dirtUnderMouse = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.15f, dirtMask);
 
         //Show highlighter tile
         if(!mousePos.Equals(previousMousePos) && !canvas.activeSelf){
@@ -42,7 +42,6 @@ public class GridController : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.E)){
-            canvas.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 10);
             canvas.SetActive(!canvas.activeSelf);
         }
     }

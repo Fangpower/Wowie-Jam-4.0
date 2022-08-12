@@ -22,10 +22,10 @@ public class Enemy : MonoBehaviour
     }
 
     private void Update(){
-        if(Vector2.Distance(transform.position, centre.position) > 1.15f){
+        if(Vector2.Distance(transform.position, centre.position) > 1.15f && health > 0){
             transform.position = Vector2.MoveTowards(transform.position, centre.position, speed * Time.deltaTime);
             anim.SetBool("Attack", false);
-        } else {
+        } else if(health > 0) {
             anim.SetBool("Attack", true);
             if(!attacking) StartCoroutine("Attack");
         }
@@ -40,9 +40,9 @@ public class Enemy : MonoBehaviour
     }
 
     public void Hit(Vector2 dir, float damage){
-        rb.AddForce(dir * knockBack, ForceMode2D.Impulse);
-        StartCoroutine("EndKnockBack");
         health-=damage;
+        if(health > 0) rb.AddForce(dir * knockBack, ForceMode2D.Impulse);
+        StartCoroutine("EndKnockBack");
     }
 
     private IEnumerator EndKnockBack(){
@@ -51,6 +51,9 @@ public class Enemy : MonoBehaviour
     }
 
     public void Die(){
+        rb.velocity = Vector2.zero;
+        GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore();
+        GameObject.Find("Store").GetComponent<Store>().UpdateMoney();
         GameObject.Destroy(gameObject);
     }
 

@@ -7,6 +7,8 @@ public class Plant : MonoBehaviour
 {
     [SerializeField] float time;
     [SerializeField] Sprite[] cycle;
+    [SerializeField] ParticleSystem readyPart;
+    [SerializeField] ParticleSystem harvestPart;
 
     private TMP_Text text;
     
@@ -37,12 +39,15 @@ public class Plant : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = cycle[x];
             x++;
         }
+        readyPart.Play();
         done = true;
     }
 
     public void Harvest(){
         current += Random.Range(2, 4);
         text.text = current.ToString();
+        harvestPart.transform.parent = null;
+        harvestPart.Play();
         GameObject.Destroy(gameObject);
     }
 }

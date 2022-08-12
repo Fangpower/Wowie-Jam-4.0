@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] bool bomb;
     [SerializeField] float bombSize;
     [SerializeField] LayerMask enemyMask;
+    [SerializeField] ParticleSystem breakPart;
 
     public Vector2 dir;
 
@@ -31,12 +32,18 @@ public class Bullet : MonoBehaviour
                     coll.GetComponent<Enemy>().Hit(dir, damage);
                 }
             }
-            if(!perice) GameObject.Destroy(gameObject);
+            if(!perice) Die();
         }
     }
 
     private IEnumerator Death(){
         yield return new WaitForSeconds(5f);
+        Die();
+    }
+
+    private void Die(){
+        breakPart.transform.parent = null;
+        breakPart.Play();
         GameObject.Destroy(gameObject);
     }
 }
