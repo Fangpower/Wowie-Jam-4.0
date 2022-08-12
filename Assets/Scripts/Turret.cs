@@ -60,6 +60,8 @@ public class Turret : MonoBehaviour
             canFire = false;
         }
 
+        Selection();
+
         healthBar.fillAmount = health/maxHealth;
     }
 
@@ -69,10 +71,18 @@ public class Turret : MonoBehaviour
         StopCoroutine("CoolDown");
     }
 
-    public void Selection(int choice){
-        boxes[currentAmmo].sprite = boxLooks[0];
+    private void Selection(){
+        int tempChoice = 0;
+        int choice = 0;
+        foreach(TMP_Text text in ammoText){
+            int temp;
+            int.TryParse(text.text, out temp);
+            if(temp > 2){
+                choice = tempChoice;
+            }
+            tempChoice++;
+        }
         currentAmmo = choice;
-        boxes[currentAmmo].sprite = boxLooks[1];
         showAmmo.sprite = ammoIcons[currentAmmo];
     }
 
