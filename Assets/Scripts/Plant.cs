@@ -20,6 +20,7 @@ public class Plant : MonoBehaviour
 
     private void Start()
     {
+        time = baseTime - growLevel/10;
         StartCoroutine("Grow");
 
         switch(transform.name){
@@ -31,6 +32,7 @@ public class Plant : MonoBehaviour
         int.TryParse(text.text, out current);
 
         store = FindObjectOfType<Store>();
+        
     }
 
     void Update(){
