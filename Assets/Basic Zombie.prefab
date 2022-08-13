@@ -148,12 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb9a149608cfe6438c13b5852160cf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 1
   knockBack: 7
   knockBackTime: 0.1
   health: 2
   damage: 1
   isBoss: 0
+  attackPart: {fileID: 0}
 --- !u!95 &3747806379863991007
 Animator:
   serializedVersion: 4

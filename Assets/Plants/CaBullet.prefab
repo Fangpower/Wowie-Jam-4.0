@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 10
   damage: 3
-  perice: 0
+  perice: 1
   bomb: 0
   bombSize: 0
   enemyMask:

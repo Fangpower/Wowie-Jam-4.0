@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private Animator anim;
     private bool attacking;
     private AudioSource ad;
+    private Vector3 bossOffset;
 
     [SerializeField] float speed;
     [SerializeField] float knockBack;
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float damage;
     [SerializeField] bool isBoss;
+    [SerializeField] ParticleSystem attackPart;
     
     
     private void Start(){
@@ -24,10 +26,11 @@ public class Enemy : MonoBehaviour
         centre = GameObject.Find("Turret").transform;
         anim = GetComponent<Animator>();
         ad = GetComponent<AudioSource>();
+        bossOffset = new Vector3(0, 0.5f);
     }
 
     private void Update(){
-        if(Vector2.Distance(transform.position, centre.position) > 1.15f && health > 0){
+        if(Vector2.Distance(transform.position, centre.position + bossOffset) > 1.15f && health > 0){
             transform.position = Vector2.MoveTowards(transform.position, centre.position, speed * Time.deltaTime);
             anim.SetBool("Attack", false);
         } else if(health > 0) {
@@ -67,6 +70,7 @@ public class Enemy : MonoBehaviour
             switch(name){
                 case "Radish Lord(Clone)": bossAmmo = GameObject.Find("RadishText").GetComponent<TMP_Text>(); break;
                 case "Carrot Lord(Clone)": bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
+                case "Melon Lord(Clone)": bossAmmo = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
             }
             bossAmmo.text = (5).ToString();
             FindObjectOfType<Turret>().RestoreHealth();
@@ -83,5 +87,9 @@ public class Enemy : MonoBehaviour
         }
         attacking = false;
         StopCoroutine("Attack");
+    }
+
+    public void PlayAttack(){
+        attackPart.Play();
     }
 }
