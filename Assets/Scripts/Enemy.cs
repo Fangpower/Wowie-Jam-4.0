@@ -66,8 +66,10 @@ public class Enemy : MonoBehaviour
             TMP_Text bossAmmo = null;
             switch(name){
                 case "Radish Lord(Clone)": bossAmmo = GameObject.Find("RadishText").GetComponent<TMP_Text>(); break;
+                case "Carrot Lord(Clone)": bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
             }
             bossAmmo.text = (5).ToString();
+            FindObjectOfType<Turret>().RestoreHealth();
         }
         GameObject.Destroy(gameObject);
     }

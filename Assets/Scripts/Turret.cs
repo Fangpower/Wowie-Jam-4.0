@@ -107,4 +107,8 @@ public class Turret : MonoBehaviour
     public void Damage(float damage){
         health-=damage;
     }
+
+    public void RestoreHealth(){
+        health = maxHealth;
+    }
 }

@@ -6,6 +6,7 @@ public class EnemyWaves : MonoBehaviour
 {
     [SerializeField] GameObject enemy1;
     [SerializeField] GameObject radishLord;
+    [SerializeField] GameObject carrotLord;
     [SerializeField] float speed;
     [SerializeField] float baseTime;
 
@@ -13,6 +14,7 @@ public class EnemyWaves : MonoBehaviour
     float percentage;
 
     private bool radishBoss;
+    private bool carrotBoss;
 
     void Start()
     {
@@ -29,6 +31,11 @@ public class EnemyWaves : MonoBehaviour
             var temp = Instantiate(radishLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
             temp.transform.SetParent(transform);
             radishBoss = true;
+        }
+        if(!carrotBoss && (baseTime >= 2.999 && baseTime <= 3.001)){
+            var temp = Instantiate(carrotLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
+            temp.transform.SetParent(transform);
+            carrotBoss = true;
         }
     }
 

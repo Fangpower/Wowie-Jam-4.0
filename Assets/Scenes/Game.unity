@@ -3147,6 +3147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy1: {fileID: 2300107994348979894, guid: b53215ab36de6ae4c8a495f7a2b6885f, type: 3}
   radishLord: {fileID: 8152101371847278767, guid: bb9ac029275389d42899077b1439e96b, type: 3}
+  carrotLord: {fileID: 4018812799859558771, guid: 592c41008caa56f4b8c8d7e6206c77c8, type: 3}
   speed: 0.01
   baseTime: 5
 --- !u!4 &912101468
