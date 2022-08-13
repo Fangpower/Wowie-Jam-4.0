@@ -148,9 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  knockBack: 10
+  knockBack: 5
   knockBackTime: 0.1
-  health: 2
+  health: 3
   damage: 1
 --- !u!95 &3747806379863991007
 Animator:

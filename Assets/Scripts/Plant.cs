@@ -5,12 +5,15 @@ using TMPro;
 
 public class Plant : MonoBehaviour
 {
-    [SerializeField] float time;
+    [SerializeField] float baseTime;
     [SerializeField] Sprite[] cycle;
     [SerializeField] ParticleSystem readyPart;
     [SerializeField] ParticleSystem harvestPart;
 
     private TMP_Text text;
+    private Store store;
+    private float growLevel;
+    public float time;
     
     public int current;
     public bool done;
@@ -26,10 +29,14 @@ public class Plant : MonoBehaviour
             case "Melon(Clone)": text = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
         }
         int.TryParse(text.text, out current);
+
+        store = FindObjectOfType<Store>();
     }
 
     void Update(){
         int.TryParse(text.text, out current);
+        growLevel = store.growLevel;
+        time = baseTime - growLevel/10;
     }
 
     private IEnumerator Grow(){
@@ -44,7 +51,7 @@ public class Plant : MonoBehaviour
     }
 
     public void Harvest(){
-        current += Random.Range(2, 4);
+        current += Random.Range(2 + (int)store.harvestLevel/4, 4 + (int)store.harvestLevel/4);
         text.text = current.ToString();
         harvestPart.transform.parent = null;
         harvestPart.Play();
