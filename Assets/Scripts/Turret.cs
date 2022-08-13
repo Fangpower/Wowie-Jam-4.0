@@ -27,6 +27,8 @@ public class Turret : MonoBehaviour
     private Vector2 direction;
     private bool canFire = true;
     private float health;
+    private float time;
+    private float fireLevel;
 
     void Start(){
         health = maxHealth;
@@ -63,10 +65,23 @@ public class Turret : MonoBehaviour
         Selection();
 
         healthBar.fillAmount = health/maxHealth;
+
+        if(health <= 0){
+            FindObjectOfType<EnemyWaves>().enabled = false;
+            Enemy[] targ = FindObjectsOfType<Enemy>();
+            foreach(Enemy e in targ){
+                GameObject.Destroy(e.gameObject);
+            }
+            FindObjectOfType<Score>().StartCoroutine("ShowScore");
+            this.enabled = false;
+        }
+
+        fireLevel = FindObjectOfType<Store>().fireLevel;
     }
 
     private IEnumerator CoolDown(){
-        yield return new WaitForSeconds(coolDownTime);
+        time = coolDownTime - fireLevel/20;
+        yield return new WaitForSeconds(time);
         canFire = true;
         StopCoroutine("CoolDown");
     }

@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 10
-  damage: 2
+  damage: 4
   perice: 0
   bomb: 1
   bombSize: 2
