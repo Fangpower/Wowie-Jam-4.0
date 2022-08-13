@@ -9,9 +9,11 @@ public class Plant : MonoBehaviour
     [SerializeField] Sprite[] cycle;
     [SerializeField] ParticleSystem readyPart;
     [SerializeField] ParticleSystem harvestPart;
+    [SerializeField] AudioClip audioC;
 
     private TMP_Text text;
     private Store store;
+    private AudioSource audioS;
     private float growLevel;
     public float time;
     
@@ -20,6 +22,8 @@ public class Plant : MonoBehaviour
 
     private void Start()
     {
+        store = FindObjectOfType<Store>();
+        growLevel = store.growLevel;
         time = baseTime - growLevel/10;
         StartCoroutine("Grow");
 
@@ -31,7 +35,10 @@ public class Plant : MonoBehaviour
         }
         int.TryParse(text.text, out current);
 
-        store = FindObjectOfType<Store>();
+        audioS = GameObject.Find("Grid").GetComponent<AudioSource>();
+        audioS.clip = audioC;
+        audioS.pitch = 1 + Random.Range(-0.1f, 0.1f);
+        audioS.Play();
         
     }
 
@@ -43,6 +50,7 @@ public class Plant : MonoBehaviour
 
     private IEnumerator Grow(){
         int x = 0;
+        time = baseTime - growLevel/10;
         while(x < cycle.Length){
             yield return new WaitForSeconds(time);
             GetComponent<SpriteRenderer>().sprite = cycle[x];
@@ -57,6 +65,9 @@ public class Plant : MonoBehaviour
         text.text = current.ToString();
         harvestPart.transform.parent = null;
         harvestPart.Play();
+        audioS.clip = audioC;
+        audioS.pitch = 1 + Random.Range(-0.2f, 0.2f);
+        audioS.Play();
         GameObject.Destroy(gameObject);
     }
 }

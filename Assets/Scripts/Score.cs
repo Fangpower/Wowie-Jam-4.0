@@ -26,28 +26,34 @@ public class Score : MonoBehaviour
     public IEnumerator ShowScore(){
         scoreMenu.SetActive(true);
         enemiesScore.gameObject.SetActive(true);
-        int curScore = 0;
+        float curScore = 0;
         while(curScore < score){
-            curScore++;
+            curScore = Mathf.Clamp(curScore += 10, 0, score);
             enemiesScore.text = "Score: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }
+        yield return new WaitForSeconds(0.5f);
+
         curScore = 0;
         float money = FindObjectOfType<Store>().totalMoney;
+        print(money);
         moneyScore.gameObject.SetActive(true);
         while(curScore < money){
-            curScore++;
+            curScore = Mathf.Clamp(curScore += 10, 0, money);
             moneyScore.text = "Money: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }
+        yield return new WaitForSeconds(0.5f);
+
         curScore = 0;
         float totalScore = score * money;
         finalScore.gameObject.SetActive(true);
         while(curScore < totalScore){
-            curScore++;
+            curScore = Mathf.Clamp(curScore += 10, 0, totalScore);
             finalScore.text = "Total Score: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }
+        yield return new WaitForSeconds(0.5f);
         menuButton.SetActive(true);
         yield return null;
     }

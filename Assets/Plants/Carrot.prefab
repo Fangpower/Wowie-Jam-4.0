@@ -111,6 +111,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3d5a7a99efc4ff64894a582eb0096d09, type: 3}
   readyPart: {fileID: 2586358282988646946}
   harvestPart: {fileID: 2230699964292033352}
+  audioC: {fileID: 8300000, guid: ff4b716c1f6414941a68a60cd3867963, type: 3}
   time: 0
   current: 0
   done: 0

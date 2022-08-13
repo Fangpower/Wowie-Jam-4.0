@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -8,17 +9,21 @@ public class Enemy : MonoBehaviour
     private Transform centre;
     private Animator anim;
     private bool attacking;
+    private AudioSource ad;
 
     [SerializeField] float speed;
     [SerializeField] float knockBack;
     [SerializeField] float knockBackTime;
     [SerializeField] float health;
     [SerializeField] float damage;
+    [SerializeField] bool isBoss;
+    
     
     private void Start(){
         rb = GetComponent<Rigidbody2D>();
         centre = GameObject.Find("Turret").transform;
         anim = GetComponent<Animator>();
+        ad = GetComponent<AudioSource>();
     }
 
     private void Update(){
@@ -42,6 +47,8 @@ public class Enemy : MonoBehaviour
     public void Hit(Vector2 dir, float damage){
         health-=damage;
         if(health > 0) rb.AddForce(dir * knockBack, ForceMode2D.Impulse);
+        ad.pitch = 1 + Random.Range(-0.2f, 0.2f);
+        ad.Play();
         StartCoroutine("EndKnockBack");
     }
 
@@ -54,6 +61,14 @@ public class Enemy : MonoBehaviour
         rb.velocity = Vector2.zero;
         GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore();
         GameObject.Find("Store").GetComponent<Store>().UpdateMoney();
+        
+        if(isBoss){
+            TMP_Text bossAmmo = null;
+            switch(name){
+                case "Radish Lord(Clone)": bossAmmo = GameObject.Find("RadishText").GetComponent<TMP_Text>(); break;
+            }
+            bossAmmo.text = (5).ToString();
+        }
         GameObject.Destroy(gameObject);
     }
 

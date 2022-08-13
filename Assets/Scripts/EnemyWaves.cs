@@ -5,30 +5,36 @@ using UnityEngine;
 public class EnemyWaves : MonoBehaviour
 {
     [SerializeField] GameObject enemy1;
-    [SerializeField] AnimationCurve ac;
+    [SerializeField] GameObject radishLord;
     [SerializeField] float speed;
     [SerializeField] float baseTime;
 
     float deltaTime;
     float percentage;
-    float curTime;
+
+    private bool radishBoss;
 
     void Start()
     {
         StartCoroutine("Waves");
-        StartCoroutine("Difficulty");
-        curTime = baseTime;
     }
 
     private void Update(){
         deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         //print(Mathf.Ceil(fps));
+        baseTime -= speed * Time.deltaTime;
+        baseTime = Mathf.Clamp(baseTime, 1, 5);
+        if(!radishBoss && (baseTime >= 3.999 && baseTime <= 4.001)){
+            var temp = Instantiate(radishLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
+            temp.transform.SetParent(transform);
+            radishBoss = true;
+        }
     }
 
     private IEnumerator Waves(){
         while(true){
-            yield return new WaitForSeconds(curTime);
+            yield return new WaitForSeconds(baseTime);
             
             int dir = Random.Range(0, 4);
             Vector2 randPos = new Vector2(0,0);
@@ -40,17 +46,10 @@ public class EnemyWaves : MonoBehaviour
                 case 3: randPos = new Vector2(Random.Range(-5, 6), 6.5f); break;
             }
 
+            
+
             var temp = Instantiate(enemy1, randPos, Quaternion.identity);
             temp.transform.SetParent(transform);
-        }
-    }
-
-    private IEnumerator Difficulty(){
-        while(percentage < 1f){
-            yield return new WaitForSeconds(speed);
-            percentage += Time.deltaTime * 1;
-            curTime = baseTime * ac.Evaluate(percentage);
-            //print(curTime);
         }
     }
 }

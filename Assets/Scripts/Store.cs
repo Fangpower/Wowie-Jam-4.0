@@ -27,27 +27,35 @@ public class Store : MonoBehaviour
     [SerializeField] TMP_Text coinLevelText;
     public int coinLevel;
 
+    [SerializeField] AudioClip goodButton;
+    [SerializeField] AudioClip badButton;
+
     private float money = 0;
+    private AudioSource ad;
     public float totalMoney = 0;
 
     private void Start(){
-        
+        ad = GetComponent<AudioSource>();
     }
 
     public void UpdateMoney(){
-        money += (int)Random.Range(5 + coinLevel, 10 + coinLevel);
-        totalMoney += money;
+        int tempMon = (int)Random.Range(5 + coinLevel, 10 + coinLevel);
+        totalMoney += tempMon;
+        money += tempMon;
         text.text = "Money: " + money.ToString();
     }
 
     public void UpgradeGrow(){
-        if(money >= growCost){
+        if(money >= growCost && growLevel < 39){
             money -= growCost;
             text.text = "Money: " + money.ToString();
             growCost = (int)(growCost * 1.5f);
             growCostText.text = "Cost: " + growCost.ToString();
             growLevel++;
             growLevelText.text = "Level: " + growLevel;
+            Sound(goodButton);
+        } else {
+            Sound(badButton);
         }
     }
 
@@ -59,17 +67,23 @@ public class Store : MonoBehaviour
             harvestCostText.text = "Cost: " + harvestCost.ToString();
             harvestLevel++;
             harvestLevelText.text = "Level: " + harvestLevel;
+            Sound(goodButton);
+        } else {
+            Sound(badButton);
         }
     }
 
     public void UpgradeFire(){
-        if(money >= fireCost){
+        if(money >= fireCost && fireLevel < 19){
             money -= fireCost;
             text.text = "Money: " + money.ToString();
             fireCost = (int)(fireCost * 1.5f);
             fireCostText.text = "Cost: " + fireCost.ToString();
             fireLevel++;
             fireLevelText.text = "Level: " + fireLevel;
+            Sound(goodButton);
+        } else {
+            Sound(badButton);
         }
     }
 
@@ -81,6 +95,15 @@ public class Store : MonoBehaviour
             coinCostText.text = "Cost: " + coinCost.ToString();
             coinLevel++;
             coinLevelText.text = "Level: " + coinLevel;
+            Sound(goodButton);
+        } else {
+            Sound(badButton);
         }
+    }
+
+    void Sound(AudioClip ac){
+        ad.clip = ac;
+        ad.pitch = 1 + Random.Range(-0.1f, 0.1f);
+        ad.Play();
     }
 }

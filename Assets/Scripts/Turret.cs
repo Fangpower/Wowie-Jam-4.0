@@ -22,7 +22,7 @@ public class Turret : MonoBehaviour
     [SerializeField] float maxHealth;
     [SerializeField] Image healthBar;
 
-
+    private AudioSource ad;
     private Transform closestEnemy;
     private Vector2 direction;
     private bool canFire = true;
@@ -37,6 +37,7 @@ public class Turret : MonoBehaviour
     void Update()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, 5.25f, enemyMask);
+        ad = GetComponent<AudioSource>();
 
         foreach(Collider2D coll in enemies){
             if(closestEnemy == null){
@@ -56,6 +57,8 @@ public class Turret : MonoBehaviour
             var temp = Instantiate(bullet[currentAmmo], barrel.position, Quaternion.identity);
             temp.transform.up = direction;
             temp.GetComponent<Bullet>().dir = direction;
+            ad.pitch = 1 + Random.Range(-0.2f, 0.2f);
+            ad.Play();
             StartCoroutine("CoolDown");
             currentAmmoAmt--;
             ammoText[currentAmmo].text = currentAmmoAmt.ToString();
@@ -80,7 +83,7 @@ public class Turret : MonoBehaviour
     }
 
     private IEnumerator CoolDown(){
-        time = coolDownTime - fireLevel/20;
+        time = coolDownTime - fireLevel/10;
         yield return new WaitForSeconds(time);
         canFire = true;
         StopCoroutine("CoolDown");
