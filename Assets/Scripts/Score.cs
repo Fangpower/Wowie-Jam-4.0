@@ -49,7 +49,7 @@ public class Score : MonoBehaviour
         float totalScore = score + money;
         finalScore.gameObject.SetActive(true);
         while(curScore < totalScore){
-            curScore = Mathf.Clamp(curScore += 10, 0, totalScore);
+            curScore = Mathf.Clamp(curScore += 76, 0, totalScore);
             finalScore.text = "Total Score: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }

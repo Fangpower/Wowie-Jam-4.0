@@ -61,7 +61,7 @@ public class Plant : MonoBehaviour
     }
 
     public void Harvest(){
-        current += Random.Range(2 + (int)store.harvestLevel/4, 4 + (int)store.harvestLevel/4);
+        current += Random.Range(2 + (int)store.harvestLevel/2, 4 + (int)store.harvestLevel/2);
         text.text = current.ToString();
         harvestPart.transform.parent = null;
         harvestPart.Play();

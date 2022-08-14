@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
                 case "Carrot Lord(Clone)": ew.ActivateAm(2); bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
                 case "Melon Lord(Clone)": ew.ActivateAm(3); bossAmmo = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
             }
-            bossAmmo.text = (15).ToString();
+            bossAmmo.text = (20).ToString();
             FindObjectOfType<Turret>().RestoreHealth();
             ew.zombieNum++;
             bossUI.SetActive(false);

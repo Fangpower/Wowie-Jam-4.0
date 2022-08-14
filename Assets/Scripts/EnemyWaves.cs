@@ -37,7 +37,7 @@ public class EnemyWaves : MonoBehaviour
         float fps = 1.0f / deltaTime;
         //print(Mathf.Ceil(fps));
         baseTime -= speed * Time.deltaTime;
-        baseTime = Mathf.Clamp(baseTime, 0.5f, 5);
+        baseTime = Mathf.Clamp(baseTime, 1f, 5);
         if(!radishBoss && (baseTime >= 3.999 && baseTime <= 4.001)){
             var temp = Instantiate(radishLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
             temp.transform.SetParent(transform);

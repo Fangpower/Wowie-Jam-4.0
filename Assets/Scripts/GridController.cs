@@ -42,7 +42,7 @@ public class GridController : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && underMouse.Length == 0 && !canvas.activeSelf && dirtUnderMouse.Length == 1){
             OnPlant();
         } else if(Input.GetMouseButtonDown(0) && underMouse.Length == 1){
-            if(underMouse[0].GetComponent<Plant>().done){
+            if(underMouse[0].GetComponent<Plant>().done && !canvas.activeSelf){
                 underMouse[0].GetComponent<Plant>().Harvest();
             }
         }
