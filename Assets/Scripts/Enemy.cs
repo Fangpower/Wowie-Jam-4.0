@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Enemy : MonoBehaviour
@@ -11,6 +12,11 @@ public class Enemy : MonoBehaviour
     private bool attacking;
     private AudioSource ad;
     private Vector3 bossOffset;
+
+    private GameObject bossUI;
+    private Image bossHealth;
+    private TMP_Text bossTitle;
+    private float bossMaxHealth;
 
     [SerializeField] float speed;
     [SerializeField] float knockBack;
@@ -27,6 +33,15 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         ad = GetComponent<AudioSource>();
         bossOffset = new Vector3(0, 0.5f);
+
+        if(isBoss){
+            bossUI = GameObject.Find("BossUI").transform.GetChild(0).gameObject;
+            bossUI.SetActive(true);
+            bossHealth = GameObject.Find("BossHealthBar").GetComponent<Image>();
+            bossTitle = GameObject.Find("BossTitle").GetComponent<TMP_Text>();
+            bossMaxHealth = health;
+            bossTitle.text = name.TrimEnd(new char[]{'(', 'C', 'l', 'o', 'n', 'e', ')'});
+        }
     }
 
     private void Update(){
@@ -44,6 +59,10 @@ public class Enemy : MonoBehaviour
 
         if(transform.position.x < centre.position.x){
             GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        if(isBoss){
+            bossHealth.fillAmount = health/bossMaxHealth;
         }
     }
 
@@ -74,6 +93,7 @@ public class Enemy : MonoBehaviour
             }
             bossAmmo.text = (5).ToString();
             FindObjectOfType<Turret>().RestoreHealth();
+            bossUI.SetActive(true);
         }
         GameObject.Destroy(gameObject);
     }
