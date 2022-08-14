@@ -5056,6 +5056,6 @@ MonoBehaviour:
   bombSize: 0
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   breakPart: {fileID: 5878832232576661723}
   dir: {x: 0, y: 0}

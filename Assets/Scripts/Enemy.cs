@@ -17,15 +17,20 @@ public class Enemy : MonoBehaviour
     private Image bossHealth;
     private TMP_Text bossTitle;
     private float bossMaxHealth;
+    private EnemyWaves ew;
 
     [SerializeField] float speed;
     [SerializeField] float knockBack;
     [SerializeField] float knockBackTime;
     [SerializeField] float health;
     [SerializeField] float damage;
-    [SerializeField] bool isBoss;
+    public bool isBoss;
     [SerializeField] ParticleSystem attackPart;
     [SerializeField] float extraMoney;
+    [SerializeField] float extraScore = 1;
+
+    [SerializeField] AudioClip attack;
+    [SerializeField] AudioClip hurt;
     
     
     private void Start(){
@@ -34,6 +39,8 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         ad = GetComponent<AudioSource>();
         bossOffset = new Vector3(0, 0.5f);
+
+        ew = FindObjectOfType<EnemyWaves>();
 
         if(isBoss){
             bossUI = GameObject.Find("BossUI").transform.GetChild(0).gameObject;
@@ -70,9 +77,14 @@ public class Enemy : MonoBehaviour
     public void Hit(Vector2 dir, float damage){
         health-=damage;
         if(health > 0) rb.AddForce(dir * knockBack, ForceMode2D.Impulse);
+        Sound(hurt);
+        StartCoroutine("EndKnockBack");
+    }
+
+    void Sound(AudioClip clip){
+        ad.clip = clip;
         ad.pitch = 1 + Random.Range(-0.2f, 0.2f);
         ad.Play();
-        StartCoroutine("EndKnockBack");
     }
 
     private IEnumerator EndKnockBack(){
@@ -82,19 +94,19 @@ public class Enemy : MonoBehaviour
 
     public void Die(){
         rb.velocity = Vector2.zero;
-        GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore();
+        GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore(extraScore);
         GameObject.Find("Store").GetComponent<Store>().UpdateMoney(extraMoney);
         
         if(isBoss){
             TMP_Text bossAmmo = null;
             switch(name){
-                case "Radish Lord(Clone)": bossAmmo = GameObject.Find("RadishText").GetComponent<TMP_Text>(); break;
-                case "Carrot Lord(Clone)": bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
-                case "Melon Lord(Clone)": bossAmmo = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
+                case "Radish Lord(Clone)": ew.ActivateAm(1); bossAmmo = GameObject.Find("RadishText").GetComponent<TMP_Text>(); break;
+                case "Carrot Lord(Clone)": ew.ActivateAm(2); bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
+                case "Melon Lord(Clone)": ew.ActivateAm(3); bossAmmo = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
             }
             bossAmmo.text = (15).ToString();
             FindObjectOfType<Turret>().RestoreHealth();
-            FindObjectOfType<EnemyWaves>().zombieNum++;
+            ew.zombieNum++;
             bossUI.SetActive(false);
         }
         GameObject.Destroy(gameObject);
@@ -112,6 +124,41 @@ public class Enemy : MonoBehaviour
     }
 
     public void PlayAttack(){
+        Sound(attack);
         attackPart.Play();
+    }
+
+    public void WinGame(){
+        rb.velocity = Vector2.zero;
+        GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore(extraScore);
+        GameObject.Find("Store").GetComponent<Store>().UpdateMoney(extraMoney);
+        FindObjectOfType<Turret>().victoryPart.Play();
+        FindObjectOfType<Turret>().enabled = false;
+        ew.done = true;
+        bossUI.SetActive(false);
+        gameObject.layer = 0;
+        
+        StartCoroutine("EndGame");
+    }
+
+    private IEnumerator EndGame(){
+        TMP_Text vic = GameObject.Find("GameState").GetComponent<TMP_Text>();
+        vic.text = "V";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Vi";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Vic";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Vict";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Victo";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Victor";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Victory";
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(3.3f);
+        GameObject.Find("GameState").GetComponent<TMP_Text>().text = "";
+        FindObjectOfType<Score>().StartCoroutine("ShowScore");
     }
 }

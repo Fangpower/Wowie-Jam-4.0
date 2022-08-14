@@ -156,6 +156,9 @@ MonoBehaviour:
   isBoss: 0
   attackPart: {fileID: 0}
   extraMoney: 30
+  extraScore: 50
+  attack: {fileID: 8300000, guid: bc58f73bdea6ece45a83c66676b8a49d, type: 3}
+  hurt: {fileID: 8300000, guid: 2c28354ba24be2d40ae878368357eb7c, type: 3}
 --- !u!95 &143454119872400719
 Animator:
   serializedVersion: 4

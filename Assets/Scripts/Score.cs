@@ -18,8 +18,8 @@ public class Score : MonoBehaviour
         text = GetComponent<TMP_Text>();
     }
 
-    public void UpdateScore(){
-        score++;
+    public void UpdateScore(float newS){
+        score += newS;
         text.text = "Score: " + score.ToString();
     }
 

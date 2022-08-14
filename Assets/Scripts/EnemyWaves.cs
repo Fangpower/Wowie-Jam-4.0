@@ -8,8 +8,13 @@ public class EnemyWaves : MonoBehaviour
     [SerializeField] GameObject radishLord;
     [SerializeField] GameObject carrotLord;
     [SerializeField] GameObject melonLord;
+    [SerializeField] GameObject potatoKing;
     [SerializeField] float speed;
     [SerializeField] float baseTime;
+
+    [SerializeField] GameObject raAm;
+    [SerializeField] GameObject caAm;
+    [SerializeField] GameObject meAm;   
 
     private float deltaTime;
     private float percentage;
@@ -17,8 +22,10 @@ public class EnemyWaves : MonoBehaviour
     private bool radishBoss;
     private bool carrotBoss;
     private bool melonBoss;
+    private bool potatoBoss;
 
     public int zombieNum = 0;
+    public bool done;
 
     void Start()
     {
@@ -44,11 +51,23 @@ public class EnemyWaves : MonoBehaviour
             var temp = Instantiate(melonLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
             temp.transform.SetParent(transform);
             melonBoss = true;
+        }if(!potatoBoss && (baseTime >= 0.999 && baseTime <= 1.001)){
+            var temp = Instantiate(potatoKing, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
+            temp.transform.SetParent(transform);
+            potatoBoss = true;
+        }
+
+        if(done){
+            foreach(Enemy en in FindObjectsOfType<Enemy>()){
+                if(!en.isBoss){
+                    GameObject.Destroy(en.gameObject);
+                }
+            }
         }
     }
 
     private IEnumerator Waves(){
-        while(true){
+        while(!done){
             yield return new WaitForSeconds(baseTime);
             
             int dir = Random.Range(0, 4);
@@ -65,6 +84,14 @@ public class EnemyWaves : MonoBehaviour
 
             var temp = Instantiate(zombies[zombieNum], randPos, Quaternion.identity);
             temp.transform.SetParent(transform);
+        }
+    }
+
+    public void ActivateAm(int num){
+        switch(num){
+            case 1: raAm.SetActive(true); break;
+            case 2: caAm.SetActive(true); break;
+            case 3: meAm.SetActive(true); break;
         }
     }
 }

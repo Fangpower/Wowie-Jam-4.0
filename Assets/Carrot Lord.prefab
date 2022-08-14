@@ -156,7 +156,10 @@ MonoBehaviour:
   damage: 3
   isBoss: 1
   attackPart: {fileID: 2019200902333136960}
-  extraMoney: 200
+  extraMoney: 300
+  extraScore: 50
+  attack: {fileID: 8300000, guid: 6d145f98e90522e4dae3c1189781e703, type: 3}
+  hurt: {fileID: 8300000, guid: 2c28354ba24be2d40ae878368357eb7c, type: 3}
 --- !u!95 &2030264651369245978
 Animator:
   serializedVersion: 4

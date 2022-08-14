@@ -21,6 +21,10 @@ public class Turret : MonoBehaviour
     [SerializeField] Sprite[] ammoIcons;
     [SerializeField] float maxHealth;
     [SerializeField] Image healthBar;
+    [SerializeField] ParticleSystem deathPart;
+    [SerializeField] AudioClip deathClip;
+
+    public ParticleSystem victoryPart;
 
     private AudioSource ad;
     private Transform closestEnemy;
@@ -70,12 +74,16 @@ public class Turret : MonoBehaviour
         healthBar.fillAmount = health/maxHealth;
 
         if(health <= 0){
-            FindObjectOfType<EnemyWaves>().enabled = false;
+            FindObjectOfType<EnemyWaves>().done = true;
             Enemy[] targ = FindObjectsOfType<Enemy>();
             foreach(Enemy e in targ){
                 GameObject.Destroy(e.gameObject);
             }
-            FindObjectOfType<Score>().StartCoroutine("ShowScore");
+            ad.clip = deathClip;
+            ad.pitch = 1 + Random.Range(-0.2f, 0.2f);
+            ad.Play();
+            GameObject.Find("BossUI").SetActive(false);
+            StartCoroutine("EndGame");
             this.enabled = false;
         }
 
@@ -110,5 +118,26 @@ public class Turret : MonoBehaviour
 
     public void RestoreHealth(){
         health = maxHealth;
+    }
+
+    private IEnumerator EndGame(){
+        deathPart.Play();
+        yield return new WaitForSeconds(1f);
+        TMP_Text vic = GameObject.Find("GameState").GetComponent<TMP_Text>();
+        vic.text = "D";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "De";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Def";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Defe";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Defea";
+        yield return new WaitForSeconds(0.1f);
+        vic.text = "Deafeat";
+        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(3.4f);
+        GameObject.Find("GameState").GetComponent<TMP_Text>().text = "";
+        FindObjectOfType<Score>().StartCoroutine("ShowScore");
     }
 }
