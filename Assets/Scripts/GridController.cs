@@ -36,7 +36,7 @@ public class GridController : MonoBehaviour
         }
 
         //Make plant
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && !canvas.activeSelf){
             player.targetPos = previousMousePos + new Vector3(0, 0.5f, 0);
         }
         if(Input.GetMouseButtonDown(0) && underMouse.Length == 0 && !canvas.activeSelf && dirtUnderMouse.Length == 1){

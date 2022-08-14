@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.2
-  knockBack: 5
+  knockBack: 4
   knockBackTime: 0.1
   health: 5
   damage: 1

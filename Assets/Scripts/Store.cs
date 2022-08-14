@@ -39,7 +39,7 @@ public class Store : MonoBehaviour
     }
 
     public void UpdateMoney(float extra){
-        int tempMon = (int)Random.Range(5 + extra + coinLevel, 10 + extra + coinLevel);
+        int tempMon = (int)Random.Range(5 + extra + (coinLevel*5), 10 + extra + (coinLevel*5));
         totalMoney += tempMon;
         money += tempMon;
         text.text = "Money: " + money.ToString();

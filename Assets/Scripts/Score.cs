@@ -46,7 +46,7 @@ public class Score : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         curScore = 0;
-        float totalScore = score * money;
+        float totalScore = score + money;
         finalScore.gameObject.SetActive(true);
         while(curScore < totalScore){
             curScore = Mathf.Clamp(curScore += 10, 0, totalScore);
