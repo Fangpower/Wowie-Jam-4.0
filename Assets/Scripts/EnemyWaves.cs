@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class EnemyWaves : MonoBehaviour
 {
-    [SerializeField] GameObject enemy1;
+    [SerializeField] GameObject[] zombies;
     [SerializeField] GameObject radishLord;
     [SerializeField] GameObject carrotLord;
     [SerializeField] GameObject melonLord;
     [SerializeField] float speed;
     [SerializeField] float baseTime;
 
-    float deltaTime;
-    float percentage;
+    private float deltaTime;
+    private float percentage;
 
     private bool radishBoss;
     private bool carrotBoss;
     private bool melonBoss;
+
+    public int zombieNum = 0;
 
     void Start()
     {
@@ -28,7 +30,7 @@ public class EnemyWaves : MonoBehaviour
         float fps = 1.0f / deltaTime;
         //print(Mathf.Ceil(fps));
         baseTime -= speed * Time.deltaTime;
-        baseTime = Mathf.Clamp(baseTime, 1, 5);
+        baseTime = Mathf.Clamp(baseTime, 0.5f, 5);
         if(!radishBoss && (baseTime >= 3.999 && baseTime <= 4.001)){
             var temp = Instantiate(radishLord, new Vector2(Random.Range(-5, 6), 6.5f), Quaternion.identity);
             temp.transform.SetParent(transform);
@@ -61,7 +63,7 @@ public class EnemyWaves : MonoBehaviour
 
             
 
-            var temp = Instantiate(enemy1, randPos, Quaternion.identity);
+            var temp = Instantiate(zombies[zombieNum], randPos, Quaternion.identity);
             temp.transform.SetParent(transform);
         }
     }

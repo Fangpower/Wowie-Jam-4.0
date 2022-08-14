@@ -38,8 +38,8 @@ public class Store : MonoBehaviour
         ad = GetComponent<AudioSource>();
     }
 
-    public void UpdateMoney(){
-        int tempMon = (int)Random.Range(5 + coinLevel, 10 + coinLevel);
+    public void UpdateMoney(float extra){
+        int tempMon = (int)Random.Range(5 + extra + coinLevel, 10 + extra + coinLevel);
         totalMoney += tempMon;
         money += tempMon;
         text.text = "Money: " + money.ToString();

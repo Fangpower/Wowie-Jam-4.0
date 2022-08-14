@@ -568,7 +568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 200
+  m_text: 20
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b27038e4d811b04439783c1cdf5455fd, type: 2}
   m_sharedMaterial: {fileID: 4622869827492746986, guid: b27038e4d811b04439783c1cdf5455fd, type: 2}
@@ -3559,12 +3559,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 198a4489bf0480f428fb1df9ae22c128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy1: {fileID: 2300107994348979894, guid: b53215ab36de6ae4c8a495f7a2b6885f, type: 3}
+  zombies:
+  - {fileID: 2300107994348979894, guid: b53215ab36de6ae4c8a495f7a2b6885f, type: 3}
+  - {fileID: 9045061131239128340, guid: fb6a8aacb3e66e247b4df3dd56f4d3cc, type: 3}
+  - {fileID: 2858026328417777232, guid: bf449c818bee3974384102f71750f41d, type: 3}
+  - {fileID: 3032299964190877990, guid: 9e61e05441675b747808d061c5779d4e, type: 3}
+  - {fileID: 3032299964190877990, guid: 9e61e05441675b747808d061c5779d4e, type: 3}
   radishLord: {fileID: 8152101371847278767, guid: bb9ac029275389d42899077b1439e96b, type: 3}
   carrotLord: {fileID: 4018812799859558771, guid: 592c41008caa56f4b8c8d7e6206c77c8, type: 3}
   melonLord: {fileID: 5517881738594355907, guid: e2167a7a27741544fb79e2bcff7fcfbf, type: 3}
   speed: 0.01
   baseTime: 5
+  zombieNum: 0
 --- !u!4 &912101468
 Transform:
   m_ObjectHideFlags: 0

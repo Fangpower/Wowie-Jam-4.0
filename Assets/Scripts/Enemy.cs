@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] bool isBoss;
     [SerializeField] ParticleSystem attackPart;
+    [SerializeField] float extraMoney;
     
     
     private void Start(){
@@ -82,7 +83,7 @@ public class Enemy : MonoBehaviour
     public void Die(){
         rb.velocity = Vector2.zero;
         GameObject.Find("ScoreText").GetComponent<Score>().UpdateScore();
-        GameObject.Find("Store").GetComponent<Store>().UpdateMoney();
+        GameObject.Find("Store").GetComponent<Store>().UpdateMoney(extraMoney);
         
         if(isBoss){
             TMP_Text bossAmmo = null;
@@ -91,9 +92,10 @@ public class Enemy : MonoBehaviour
                 case "Carrot Lord(Clone)": bossAmmo = GameObject.Find("CarrotText").GetComponent<TMP_Text>(); break;
                 case "Melon Lord(Clone)": bossAmmo = GameObject.Find("MelonText").GetComponent<TMP_Text>(); break;
             }
-            bossAmmo.text = (5).ToString();
+            bossAmmo.text = (15).ToString();
             FindObjectOfType<Turret>().RestoreHealth();
-            bossUI.SetActive(true);
+            FindObjectOfType<EnemyWaves>().zombieNum++;
+            bossUI.SetActive(false);
         }
         GameObject.Destroy(gameObject);
     }

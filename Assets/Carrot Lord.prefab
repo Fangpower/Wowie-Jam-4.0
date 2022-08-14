@@ -156,6 +156,7 @@ MonoBehaviour:
   damage: 3
   isBoss: 1
   attackPart: {fileID: 2019200902333136960}
+  extraMoney: 200
 --- !u!95 &2030264651369245978
 Animator:
   serializedVersion: 4
