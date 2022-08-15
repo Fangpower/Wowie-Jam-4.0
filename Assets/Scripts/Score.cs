@@ -28,7 +28,7 @@ public class Score : MonoBehaviour
         enemiesScore.gameObject.SetActive(true);
         float curScore = 0;
         while(curScore < score){
-            curScore = Mathf.Clamp(curScore += 10, 0, score);
+            curScore = Mathf.Clamp(curScore += 76, 0, score);
             enemiesScore.text = "Score: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }
@@ -39,7 +39,7 @@ public class Score : MonoBehaviour
         print(money);
         moneyScore.gameObject.SetActive(true);
         while(curScore < money){
-            curScore = Mathf.Clamp(curScore += 10, 0, money);
+            curScore = Mathf.Clamp(curScore += 76, 0, money);
             moneyScore.text = "Money: " + curScore.ToString();
             yield return new WaitForSeconds(0.00001f);
         }

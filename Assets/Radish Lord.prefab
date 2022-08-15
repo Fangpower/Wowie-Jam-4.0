@@ -5029,7 +5029,7 @@ MonoBehaviour:
   extraMoney: 200
   extraScore: 50
   attack: {fileID: 8300000, guid: 6d145f98e90522e4dae3c1189781e703, type: 3}
-  hurt: {fileID: 8300000, guid: 2c28354ba24be2d40ae878368357eb7c, type: 3}
+  hurt: {fileID: 8300000, guid: a398abb1f1f9f4c498e66e4f16945717, type: 3}
 --- !u!95 &6542418553871000774
 Animator:
   serializedVersion: 4

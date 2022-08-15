@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
+using UnityEngine.UI;
 
 public class GridController : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class GridController : MonoBehaviour
     [SerializeField] GameObject plant;
     [SerializeField] PMovement player;
     [SerializeField] AudioLowPassFilter alpF;
+    [SerializeField] Image[] boxes;
+    [SerializeField] Sprite[] boxLooks;
+    [SerializeField] GameObject[] ammos;
+
+    private int selected = 0;
 
     private Vector3Int previousMousePos = new Vector3Int();
 
@@ -60,8 +66,11 @@ public class GridController : MonoBehaviour
         return grid.WorldToCell(mouseWorldPos);
     }
 
-    public void OnClick(GameObject _plant){
-        plant = _plant;
+    public void OnClick(int choice){
+        boxes[selected].sprite = boxLooks[0];
+        plant = ammos[choice];
+        selected = choice;
+        boxes[selected].sprite = boxLooks[1];
         canvas.SetActive(false);
     }
 

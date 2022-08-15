@@ -229,7 +229,11 @@ MonoBehaviour:
   m_text: 'Left Click to plant/harvest
 
 
-    Right Click to open/close store'
+    Right Click to open/close store
+
+
+    Don''t
+    run out of ammo'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b27038e4d811b04439783c1cdf5455fd, type: 2}
   m_sharedMaterial: {fileID: 4622869827492746986, guid: b27038e4d811b04439783c1cdf5455fd, type: 2}

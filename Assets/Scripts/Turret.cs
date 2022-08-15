@@ -15,8 +15,6 @@ public class Turret : MonoBehaviour
     [SerializeField] TMP_Text[] ammoText;
     [SerializeField] int currentAmmo;
 
-    [SerializeField] Image[] boxes;
-    [SerializeField] Sprite[] boxLooks;
     [SerializeField] SpriteRenderer showAmmo;
     [SerializeField] Sprite[] ammoIcons;
     [SerializeField] float maxHealth;

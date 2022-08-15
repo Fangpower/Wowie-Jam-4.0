@@ -10,6 +10,7 @@ public class Plant : MonoBehaviour
     [SerializeField] ParticleSystem readyPart;
     [SerializeField] ParticleSystem harvestPart;
     [SerializeField] AudioClip audioC;
+    [SerializeField] AudioClip pop;
 
     private TMP_Text text;
     private Store store;
@@ -57,6 +58,9 @@ public class Plant : MonoBehaviour
             x++;
         }
         readyPart.Play();
+        audioS.clip = pop;
+        audioS.pitch = 1 + Random.Range(-0.2f, 0.2f);
+        audioS.Play();
         done = true;
     }
 

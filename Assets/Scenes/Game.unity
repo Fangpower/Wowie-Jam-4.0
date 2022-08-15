@@ -166,6 +166,19 @@ MonoBehaviour:
   plant: {fileID: 2842478442936855748, guid: 7a7ccff0361ff6b4aac95de3010453a6, type: 3}
   player: {fileID: 779792811}
   alpF: {fileID: 569152098}
+  boxes:
+  - {fileID: 623832087}
+  - {fileID: 834491630}
+  - {fileID: 1971916851}
+  - {fileID: 609223270}
+  boxLooks:
+  - {fileID: 21300000, guid: c9877311fbe11394bb70a6054cdde661, type: 3}
+  - {fileID: 21300000, guid: e40ea7062f515e24893bfb83ee3df4ee, type: 3}
+  ammos:
+  - {fileID: 2842478442936855748, guid: 7a7ccff0361ff6b4aac95de3010453a6, type: 3}
+  - {fileID: 831651905920335934, guid: d229aa1a4415f374b957a7c92fc41fad, type: 3}
+  - {fileID: 677859627307995020, guid: 353ce94129654e94e9d9f44832443067, type: 3}
+  - {fileID: 4792145526721486953, guid: e827d6bfa4f22d248a23ea245e90c7c7, type: 3}
 --- !u!156049354 &11959544
 Grid:
   m_ObjectHideFlags: 0
@@ -360,7 +373,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9490196, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1557,7 +1570,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9490196, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6879,14 +6892,6 @@ MonoBehaviour:
   - {fileID: 909777574}
   - {fileID: 454077027}
   currentAmmo: 0
-  boxes:
-  - {fileID: 623832087}
-  - {fileID: 834491630}
-  - {fileID: 1971916851}
-  - {fileID: 609223270}
-  boxLooks:
-  - {fileID: 21300000, guid: c9877311fbe11394bb70a6054cdde661, type: 3}
-  - {fileID: 21300000, guid: 79415e217469fd549b0ac6eebc424999, type: 3}
   showAmmo: {fileID: 312337684}
   ammoIcons:
   - {fileID: 21300000, guid: d64a5a17beaad344b9a3c588e3c25722, type: 3}
@@ -7459,10 +7464,10 @@ MonoBehaviour:
       - m_Target: {fileID: 11959543}
         m_TargetAssemblyTypeName: GridController, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 2
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 4792145526721486953, guid: e827d6bfa4f22d248a23ea245e90c7c7, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7529,7 +7534,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c9877311fbe11394bb70a6054cdde661, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e40ea7062f515e24893bfb83ee3df4ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7594,10 +7599,10 @@ MonoBehaviour:
       - m_Target: {fileID: 11959543}
         m_TargetAssemblyTypeName: GridController, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 2
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 2842478442936855748, guid: 7a7ccff0361ff6b4aac95de3010453a6, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8339,10 +8344,10 @@ MonoBehaviour:
       - m_Target: {fileID: 11959543}
         m_TargetAssemblyTypeName: GridController, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 2
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 831651905920335934, guid: d229aa1a4415f374b957a7c92fc41fad, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12227,7 +12232,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9490196, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -18045,10 +18050,10 @@ MonoBehaviour:
       - m_Target: {fileID: 11959543}
         m_TargetAssemblyTypeName: GridController, Assembly-CSharp
         m_MethodName: OnClick
-        m_Mode: 2
+        m_Mode: 3
         m_Arguments:
-          m_ObjectArgument: {fileID: 677859627307995020, guid: 353ce94129654e94e9d9f44832443067, type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
@@ -18450,7 +18455,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9843137, g: 0.9490196, b: 0.21176471, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
