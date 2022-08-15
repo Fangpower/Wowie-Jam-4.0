@@ -14,6 +14,7 @@ public class GridController : MonoBehaviour
     [SerializeField] LayerMask dirtMask;
     [SerializeField] GameObject plant;
     [SerializeField] PMovement player;
+    [SerializeField] AudioLowPassFilter alpF;
 
     private Vector3Int previousMousePos = new Vector3Int();
 
@@ -49,6 +50,8 @@ public class GridController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1)){
             canvas.SetActive(!canvas.activeSelf);
+            Time.timeScale = Time.timeScale == 1 ? 0.25f : 1f;
+            alpF.enabled = !alpF.isActiveAndEnabled;
         }
     }
 
