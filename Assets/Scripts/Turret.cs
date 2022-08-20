@@ -22,6 +22,9 @@ public class Turret : MonoBehaviour
     [SerializeField] ParticleSystem deathPart;
     [SerializeField] AudioClip deathClip;
 
+    [SerializeField] SpriteRenderer turretSprite;
+    [SerializeField] Sprite brokenTurret;
+
     public ParticleSystem victoryPart;
 
     private AudioSource ad;
@@ -80,6 +83,7 @@ public class Turret : MonoBehaviour
             ad.clip = deathClip;
             ad.pitch = 1 + Random.Range(-0.2f, 0.2f);
             ad.Play();
+            turretSprite.sprite = brokenTurret;
             GameObject.Find("BossUI").SetActive(false);
             StartCoroutine("EndGame");
             this.enabled = false;

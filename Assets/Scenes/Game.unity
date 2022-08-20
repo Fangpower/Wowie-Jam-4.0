@@ -6902,6 +6902,8 @@ MonoBehaviour:
   healthBar: {fileID: 2041253287}
   deathPart: {fileID: 1918065806}
   deathClip: {fileID: 8300000, guid: a61aad9f30f5788459999d68794542d2, type: 3}
+  turretSprite: {fileID: 1989204122}
+  brokenTurret: {fileID: 21300000, guid: f2a98922a567f1a478cdfe4572a641c7, type: 3}
   victoryPart: {fileID: 544611872}
 --- !u!4 &555997043
 Transform:
@@ -8709,7 +8711,7 @@ MonoBehaviour:
   carrotLord: {fileID: 4018812799859558771, guid: 592c41008caa56f4b8c8d7e6206c77c8, type: 3}
   melonLord: {fileID: 5517881738594355907, guid: e2167a7a27741544fb79e2bcff7fcfbf, type: 3}
   potatoKing: {fileID: 8150774370270333209, guid: 0f28a9bea7800cd44b674cf96ccae8c6, type: 3}
-  speed: 0.015
+  speed: 0.0125
   baseTime: 5
   raAm: {fileID: 834491628}
   caAm: {fileID: 1971916849}

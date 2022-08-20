@@ -9,15 +9,10 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] bool main;
     [SerializeField] GameObject instruct;
 
-    private void Start(){
-        if(main){
-            StartCoroutine("Close");
-        }
-    }
-    private IEnumerator Close(){
-        yield return new WaitForSeconds(4f);
+    public void Close(){
         instruct.SetActive(false);
     }
+    
     public void OnClick(){
         SceneManager.LoadScene(scene);
     }
